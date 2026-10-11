@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Institucional</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">IE</div>
+          <div>
+            <h1>Institución</h1>
+            <small>Gestión Académica</small>
+          </div>
+        </div>
+
+        <nav class="menu">
+          <button class="menu-item active" data-section="dashboard">
+            <span>Inicio</span>
+          </button>
+          <button class="menu-item" data-section="students">
+            <span>Estudiantes</span>
+          </button>
+          <button class="menu-item" data-section="teachers">
+            <span>Profesores</span>
+          </button>
+          <button class="menu-item" data-section="subjects">
+            <span>Asignaturas</span>
+          </button>
+          <button class="menu-item" data-section="inscriptions">
+            <span>Inscripciones</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <h2>Panel administrativo</h2>
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-primary" id="newStudentBtn">Nuevo estudiante</button>
+          </div>
+        </header>
+
+        <section id="dashboard" class="panel active-panel">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Total estudiantes</span>
+              <strong id="totalStudents">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Profesores</span>
+              <strong id="totalTeachers">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Asignaturas</span>
+              <strong id="totalSubjects">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Inscripciones</span>
+              <strong id="totalInscriptions">0</strong>
+            </article>
+          </div>
+
+          <div class="list-section">
+            <div class="section-header">
+              <h3>Resumen general</h3>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Asignatura</th>
+                  <th>Profesor</th>
+                  <th>Estudiantes</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="summaryRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="students" class="panel">
+          <div class="section-header">
+            <h3>Estudiantes</h3>
+            <div class="actions-inline">
+              <input id="studentSearch" type="text" placeholder="Buscar estudiante..." />
+            </div>
+          </div>
+
+          <form id="studentForm" class="form-grid">
+            <input type="hidden" id="studentId" />
+            <label>
+              Matrícula
+              <input id="studentMatricula" type="text" required />
+            </label>
+            <label>
+              Identificación
+              <input id="studentIdentificacion" type="text" required />
+            </label>
+            <label>
+              Nombre
+              <input id="studentNombre" type="text" required />
+            </label>
+            <label>
+              Apellido
+              <input id="studentApellido" type="text" required />
+            </label>
+            <label>
+              Fecha de nacimiento
+              <input id="studentNacimiento" type="date" required />
+            </label>
+            <label>
+              Género
+              <select id="studentGenero" required>
+                <option value="">Seleccione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otro</option>
+              </select>
+            </label>
+            <label>
+              Correo
+              <input id="studentCorreo" type="email" required />
+            </label>
+            <label>
+              Teléfono
+              <input id="studentTelefono" type="tel" />
+            </label>
+            <label>
+              Teléfono emergencia
+              <input id="studentTelefonoEmergencia" type="tel" />
+            </label>
+            <label class="full-width">
+              Dirección
+              <input id="studentDireccion" type="text" />
+            </label>
+            <div class="form-actions full-width">
+              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-secondary" type="button" id="cancelStudentForm">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="list-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Nombre</th>
+                  <th>Documento</th>
+                  <th>Correo</th>
+                  <th>Edad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="teachers" class="panel">
+          <div class="section-header">
+            <h3>Profesores</h3>
+            <input id="teacherSearch" type="text" placeholder="Buscar profesor..." />
+          </div>
+
+          <form id="teacherForm" class="form-grid">
+            <input type="hidden" id="teacherId" />
+            <label>
+              Identificación
+              <input id="teacherIdentificacion" type="text" required />
+            </label>
+            <label>
+              Nombre
+              <input id="teacherNombre" type="text" required />
+            </label>
+            <label>
+              Apellido
+              <input id="teacherApellido" type="text" required />
+            </label>
+            <label>
+              Correo
+              <input id="teacherCorreo" type="email" required />
+            </label>
+            <label>
+              Teléfono
+              <input id="teacherTelefono" type="tel" />
+            </label>
+            <label>
+              Especialidad
+              <input id="teacherEspecialidad" type="text" />
+            </label>
+            <div class="form-actions full-width">
+              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-secondary" type="button" id="cancelTeacherForm">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="list-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Identificación</th>
+                  <th>Correo</th>
+                  <th>Especialidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="teacherTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="subjects" class="panel">
+          <div class="section-header">
+            <h3>Asignaturas</h3>
+            <input id="subjectSearch" type="text" placeholder="Buscar asignatura..." />
+          </div>
+
+          <form id="subjectForm" class="form-grid">
+            <input type="hidden" id="subjectId" />
+            <label>
+              Código
+              <input id="subjectCodigo" type="text" required />
+            </label>
+            <label>
+              Nombre
+              <input id="subjectNombre" type="text" required />
+            </label>
+            <label>
+              Créditos
+              <input id="subjectCreditos" type="number" min="1" max="12" required />
+            </label>
+            <label>
+              Ciclo
+              <input id="subjectCiclo" type="text" required />
+            </label>
+            <label>
+              Profesor responsable
+              <select id="subjectProfesor"></select>
+            </label>
+            <label>
+              Cupo máximo
+              <input id="subjectCupo" type="number" min="1" required />
+            </label>
+            <label class="full-width">
+              Descripción
+              <textarea id="subjectDescripcion" rows="3" required></textarea>
+            </label>
+            <div class="form-actions full-width">
+              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-secondary" type="button" id="cancelSubjectForm">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="list-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Asignatura</th>
+                  <th>Créditos</th>
+                  <th>Profesor</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="subjectTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="inscriptions" class="panel">
+          <div class="section-header">
+            <h3>Inscripciones</h3>
+          </div>
+
+          <form id="inscriptionForm" class="form-grid">
+            <input type="hidden" id="inscriptionId" />
+            <label>
+              Estudiante
+              <select id="inscriptionStudent" required></select>
+            </label>
+            <label>
+              Asignatura
+              <select id="inscriptionSubject" required></select>
+            </label>
+            <label>
+              Estado
+              <select id="inscriptionEstado" required>
+                <option value="Activa">Activa</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Aprobada">Aprobada</option>
+              </select>
+            </label>
+            <label>
+              Fecha de inscripción
+              <input id="inscriptionFecha" type="date" required />
+            </label>
+            <label class="full-width">
+              Observaciones
+              <textarea id="inscriptionObservaciones" rows="3"></textarea>
+            </label>
+            <div class="form-actions full-width">
+              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-secondary" type="button" id="cancelInscriptionForm">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="list-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Estudiante</th>
+                  <th>Asignatura</th>
+                  <th>Estado</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="inscriptionTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
